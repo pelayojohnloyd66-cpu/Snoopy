@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#D8C2F3" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <title>A Little Surprise for You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Nunito:wght@400;700;800&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="snoopy" viewBox="0 0 100 100">
+        <ellipse cx="22" cy="50" rx="10" ry="22" fill="#39264F" transform="rotate(12 22 50)" />
+        <ellipse cx="50" cy="55" rx="32" ry="29" fill="#fff" stroke="#39264F" stroke-width="3" />
+        <ellipse cx="70" cy="60" rx="17" ry="12" fill="#fff" stroke="#39264F" stroke-width="3" />
+        <ellipse cx="84" cy="54" rx="6" ry="5" fill="#39264F" />
+        <circle cx="62" cy="42" r="3.5" fill="#39264F" />
+        <path
+          d="M62 68q8 6 15 0"
+          stroke="#39264F"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <circle cx="48" cy="56" r="5" fill="#F8D9EA" opacity=".8" />
+      </symbol>
+      <symbol id="woodstock" viewBox="0 0 60 60">
+        <circle cx="30" cy="32" r="20" fill="#FFD966" stroke="#39264F" stroke-width="2.5" />
+        <path
+          d="M26 8l4 8 4-8"
+          stroke="#39264F"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+        />
+        <circle cx="36" cy="28" r="2.5" fill="#39264F" />
+        <path d="M44 33l9 2-9 4z" fill="#F29A4A" stroke="#39264F" stroke-width="1.5" />
+      </symbol>
+    </svg>
+
+    <div id="fx" aria-hidden="true"></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <audio id="bgm" loop preload="none"></audio>
+
+    <header class="top">
+      <div
+        class="prog"
+        role="progressbar"
+        aria-label="Surprise progress"
+        aria-valuemin="1"
+        aria-valuemax="6"
+      >
+        <i id="bar"></i>
+      </div>
+      <button id="musicBtn" class="icon" aria-pressed="false" aria-label="Toggle music">♪</button>
+      <button id="replayBtn" class="icon" aria-label="Replay the surprise">↺</button>
+    </header>
+
+    <main id="app">
+      <!-- SCREEN 1 -->
+      <section class="screen" id="screen-0">
+        <div class="snoopy big">
+          <img class="snoopy-img" src="assets/snoopy-peep.webp" alt="Snoopy peeking" />
+        </div>
+        <h1 id="welcomeTitle">HAIIIYUUUU BEBII! 💜</h1>
+        <p class="lead">I just made a little something for you...</p>
+        <button class="btn glow" id="openBtn">OPEN YOUR SURPRISE</button>
+        <p class="pixel small">Made with lots of love, just for you.</p>
+      </section>
+
+      <!-- SCREEN 2 -->
+      <section class="screen" id="screen-1">
+        <div class="card">
+          <div class="row">
+            <span class="beat">💜</span>
+            <div class="snoopy">
+              <img
+                class="snoopy-img"
+                src="assets/giving-gift-snoopy.webp"
+                alt="Snoopy holding a gift"
+              />
+            </div>
+            <div class="woodstock">
+              <svg viewBox="0 0 60 60"><use href="#woodstock" /></svg>
+            </div>
+          </div>
+          <h2>Welcome to your little corner of the universe.</h2>
+          <p>
+            Today, I just want you to forget everything else for a little while. No stress, no
+            worries. Just you, a little happiness, and something I made especially for you.
+          </p>
+        </div>
+        <button class="btn" data-next>LET'S EXPLORE!</button>
+      </section>
+
+      <!-- SCREEN 3 -->
+      <section class="screen" id="screen-2">
+        <h2>SNOOPY'S LOVE DELIVERY 💌</h2>
+        <div class="hud pixel">
+          <span>♥ <b id="score">0</b>/<span id="target">15</span></span
+          ><span>⏱ <b id="time">25</b></span
+          ><span>BEST <b id="best">0</b></span>
+        </div>
+        <div class="sayrow">
+          <div class="react" id="react" hidden>
+            <img class="snoopy-img" src="assets/amor-love.webp" alt="Grumpy Snoopy" />
+          </div>
+          <p class="say" id="say" aria-live="polite">Tap the falling hearts!</p>
+        </div>
+        <div class="arena" id="arena">
+          <div class="overlay" id="overlay">
+            <div class="snoopy" id="ovSnoopy">
+              <img
+                class="snoopy-img"
+                src="assets/snoopy-peep.webp"
+                alt="Snoopy delivering a gift"
+              />
+            </div>
+            <h3 id="ovTitle">Help Snoopy!</h3>
+            <p id="ovText">Collect 15 hearts in 25 seconds. 💖 bonus hearts count triple!</p>
+            <button class="btn" id="playBtn">START</button>
+            <button class="btn" id="claimBtn" data-next hidden>CLAIM YOUR REWARD</button>
+          </div>
+        </div>
+        <button class="link" id="restartBtn">↺ restart game</button>
+      </section>
+
+      <!-- SCREEN 4 -->
+      <section class="screen" id="screen-3">
+        <h2>A FEW THINGS I LOVE ABOUT YOU</h2>
+        <p class="pixel small">tap a card ♡</p>
+        <div class="grid" id="cards"></div>
+        <div class="row">
+          <div class="snoopy sm">
+            <img class="snoopy-img" src="assets/cute.webp" alt="Snoopy with heart eyes" />
+          </div>
+          <span class="beat">💜</span>
+        </div>
+        <button class="btn" data-next>TO MY LETTER 💌</button>
+      </section>
+
+      <!-- SCREEN 5 -->
+      <section class="screen" id="screen-4">
+        <div id="envWrap">
+          <p class="pixel small">a letter just for you</p>
+          <button class="env" id="envBtn" aria-label="Open the envelope">
+            <span class="flap"></span><span class="seal">💜</span>
+          </button>
+          <div class="snoopy sm">
+            <img
+              class="snoopy-img"
+              src="assets/hugging-heart-snoopy.webp"
+              alt="Snoopy holding a heart"
+            />
+          </div>
+        </div>
+        <div class="paper" id="paper" hidden>
+          <div class="letter" id="letterBody" tabindex="0" aria-label="Love letter"></div>
+          <div class="row">
+            <button class="btn sm" id="skipBtn">SHOW ALL</button>
+            <button class="btn sm" id="afterLetter" data-next hidden>CONTINUE 💜</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 6 -->
+      <section class="screen" id="screen-5">
+        <div class="row sleepy">
+          <div class="snoopy">
+            <img class="snoopy-img" src="assets/zzz-sleeping.webp" alt="Snoopy sleeping" />
+          </div>
+          <div class="woodstock">
+            <svg viewBox="0 0 60 60"><use href="#woodstock" /></svg>
+          </div>
+          <span class="zzz">z Z z</span>
+        </div>
+        <p class="pixel">ONE LAST THING...</p>
+        <p class="lead">
+          Out of all the little things that make life beautiful, I'm really glad that one of them is
+          you.
+        </p>
+        <h2 class="notif">YOU ARE MY FAVORITE NOTIFICATION. 💜</h2>
+        <button class="btn glow" id="giftBtn">OPEN ONE LAST GIFT</button>
+        <div class="card" id="finalMsg" hidden>
+          <p>
+            Thank you for being part of my life, bebii. I hope this little surprise made you smile,
+            because making you happy is something I'll always love doing.
+          </p>
+          <p class="pixel small">Made especially for you, with love. ♡</p>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
